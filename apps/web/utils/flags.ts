@@ -7,6 +7,8 @@ export interface FeatureFlagUser {
 }
 
 export async function isAiUiEnabled(user: FeatureFlagUser): Promise<boolean> {
+  return true;
+  
   if (!user.email) {
     return false;
   }
@@ -17,6 +19,8 @@ export async function isAiUiEnabled(user: FeatureFlagUser): Promise<boolean> {
 }
 
 export async function isAiGenerationEnabled(user: FeatureFlagUser): Promise<boolean> {
+  return true;
+  
   if (!user.email) {
     return false;
   }
