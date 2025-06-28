@@ -5,7 +5,17 @@ RUN corepack enable
 
 FROM base AS builder
 WORKDIR /app
+# COPY . .
+
+# Copy everything and debug
 COPY . .
+
+# Debug: Let's see what we actually have
+RUN echo "=== Current directory ===" && pwd
+RUN echo "=== Files in current directory ===" && ls -la
+RUN echo "=== Files in parent directory ===" && ls -la ../ || echo "No parent directory"
+RUN echo "=== Files in grandparent directory ===" && ls -la ../../ || echo "No grandparent directory"
+RUN echo "=== Looking for pnpm-lock.yaml ===" && find . -name "pnpm-lock.yaml" -type f || echo "No pnpm-lock.yaml found"
 
 RUN corepack enable pnpm
 RUN --mount=type=cache,id=pnpm,target=/root/.local/share/pnpm/store pnpm i --frozen-lockfile
